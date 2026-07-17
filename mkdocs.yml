@@ -1,0 +1,90 @@
+site_name: Продление ВНЖ Португалии — вики
+site_description: >-
+  Народный справочник по продлению ВНЖ Португалии через портал AIMA Renovações
+  (после 30.06.2025). Собран из опыта Telegram-сообщества.
+site_url: https://self-perfection.github.io/aima-renovacoes-wiki/
+docs_dir: wiki
+site_dir: site
+
+theme:
+  name: material
+  language: ru
+  icon:
+    logo: material/card-account-details-outline
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Тёмная тема
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Светлая тема
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+exclude_docs: |
+  *.md.md
+  notebook.zim
+  Default.md
+
+nav:
+  - Главная: index.md
+  - Процесс продления:
+      - process/index.md
+      - Портал и доступ: process/portal-i-dostup.md
+      - Личный кабинет: process/lichnyj-kabinet.md
+      - Этапы заявки: process/etapy-zayavki.md
+      - Оплата: process/oplata.md
+      - Документы:
+          - process/dokumenty/index.md
+          - Заверение паспорта: process/dokumenty/zaverenie-pasporta.md
+          - Сжатие PDF под 2 МБ: process/dokumenty/szhatie-pdf.md
+      - Статьи ВНЖ (коды): process/stati-vnzh.md
+      - Карта и доставка: process/karta-i-dostavka.md
+  - Данные и предусловия:
+      - prerequisites/index.md
+      - Задолженности: prerequisites/zadolzhennosti.md
+      - Данные и адрес: prerequisites/dannye-i-adres.md
+  - Когда что-то идёт не так:
+      - problems/index.md
+      - Дозапрос: problems/dozapros.md
+      - Застревание и как двигать дело: problems/zastrevanie.md
+      - Молчаливое согласие: problems/molchalivoe-soglasie.md
+      - Коллективные обращения: problems/kollektivnye-obrashcheniya.md
+  - Особые случаи:
+      - special/index.md
+      - Воссоединение и дети: special/vossoedinenie-i-deti.md
+  - Справочное:
+      - reference/index.md
+      - Инструменты сообщества: reference/instrumenty-soobshchestva.md
+      - Ресурсы и контакты: reference/resursy-i-kontakty.md
+      - Хронология портала: reference/hronologiya.md
+      - Глоссарий: reference/glossary.md

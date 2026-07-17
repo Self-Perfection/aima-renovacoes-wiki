@@ -1,0 +1,24 @@
+# MkDocs build output
+/site/
+
+# Zim: символические ссылки *.md.md (нужны только для локального чтения в Zim)
+*.md.md
+# Zim notebook metadata / index / templates
+wiki/notebook.zim
+wiki/Default.md
+.zim/
+
+# Zim HTML-экспорт (не публикуем; сайт собирает MkDocs)
+/wiki-HTML/
+
+# Экспорт истории Telegram (большой, содержит перс. данные — НЕ публиковать)
+/Чат продления ВНЖ/
+
+# Python / окружение
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
