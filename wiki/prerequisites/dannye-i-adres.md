@@ -19,8 +19,8 @@
 - Каналы запроса смены данных ([#79933](https://t.me/aimairn/43114/79933)):
   - форма **contactenos.aima.gov.pt/contact-form** (⚠️ по каждому пункту форму
     можно отправить **только один раз**);
-  - мейлы: `geral@aima.gov.pt`, `renovacao.ar@aima.gov.pt`,
-    `epd.protecaodedados@aima.gov.pt`.
+  - мейлы: <geral@aima.gov.pt>, <renovacao.ar@aima.gov.pt>,
+    <epd.protecaodedados@aima.gov.pt>.
 - 💡 В поле свободного текста при подаче заявки можно указать просьбу сменить адрес
   и дать ссылку/код на `certidão permanente` (документ о собственности,
   обновляется за ~15 € на [predialonline.pt](https://www.predialonline.pt), код

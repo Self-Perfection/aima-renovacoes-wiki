@@ -18,12 +18,13 @@
 
 - **Единый колл-центр:** **217 115 000** ([#141938](https://t.me/aimairn/43114/141938)).
 - **Мейлы** (по частоте упоминаний в чате):
-  - `geral@aima.gov.pt` — общий
-  - `renovacao.ar@aima.gov.pt` — продления AR
-  - `epd.protecaodedados@aima.gov.pt` — защита данных
-  - `loja.lisboa1@aima.gov.pt`, `loja.lisboa2@aima.gov.pt` — ложи Лиссабона
-  - также встречались: `loja.cascais@`, `setubal@`, `portalservicos@`,
-    `manifestacao.interesse@`, `suporte.rfamiliar@aima.gov.pt`
+  - <geral@aima.gov.pt> — общий
+  - <renovacao.ar@aima.gov.pt> — продления AR
+  - <epd.protecaodedados@aima.gov.pt> — защита данных
+  - <loja.lisboa1@aima.gov.pt>, <loja.lisboa2@aima.gov.pt> — ложи Лиссабона
+  - также встречались: <loja.cascais@aima.gov.pt>, <setubal@aima.gov.pt>,
+    <portalservicos@aima.gov.pt>, <manifestacao.interesse@aima.gov.pt>,
+    <suporte.rfamiliar@aima.gov.pt>
 - **CTT поддержка (доставка):** 210 471 616 ([#79935](https://t.me/aimairn/43114/79935)).
 
 ## Связанные Telegram-чаты
@@ -53,7 +54,7 @@
 
 ## Полезные сторонние сайты
 
-- **leximigratoria** — `sites.google.com/site/leximigratoria` — статьи закона.
-- **ilovepdf.com**, **pdf24.org** — сжатие PDF.
-- **dias-uteis.pt** — калькулятор рабочих дней (для отсчёта 60 дней до
-  [молчаливого согласия](../problems/zastrevanie.md)).
+- [**leximigratoria**](https://sites.google.com/site/leximigratoria) — статьи закона.
+- [**ilovepdf.com**](https://www.ilovepdf.com), [**pdf24.org**](https://tools.pdf24.org) — сжатие PDF.
+- [**dias-uteis.pt**](https://www.dias-uteis.pt) — калькулятор рабочих дней (для отсчёта
+  60 дней до [молчаливого согласия](../problems/molchalivoe-soglasie.md)).

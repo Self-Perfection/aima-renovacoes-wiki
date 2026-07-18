@@ -9,8 +9,8 @@
 - **ilovepdf.com** — онлайн, «используют в каждом ведомстве»
   ([#44869](https://t.me/aimairn/43114/44869)).
 - **pdf24.org** — онлайн + десктоп.
-- **minimalpdfcompress** (`github.com/deminimis/minimalpdfcompress`) — оффлайн-
-  утилита; см. [Инструменты сообщества](../../reference/instrumenty-soobshchestva.md).
+- **minimalpdfcompress** ([github.com/deminimis/minimalpdfcompress](https://github.com/deminimis/minimalpdfcompress))
+  — оффлайн-утилита; см. [Инструменты сообщества](../../reference/instrumenty-soobshchestva.md).
 
 ## Приёмы
 
