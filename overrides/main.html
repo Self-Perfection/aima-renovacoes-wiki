@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+<!--
+  Призыв к дополнению вики — показывается в подвале КАЖДОЙ статьи.
+  Пишется один раз здесь, появляется на всех текущих и будущих страницах.
+  Цель: чтобы читатель, не знакомый с GitHub, всё равно понял, что может
+  внести вклад, и увидел путь без трения (написать в чате).
+-->
+{% block content %}
+  {{ super() }}
+  {% if page and page.meta and page.meta.hide_contribute %}{% else %}
+  <aside class="admonition question wiki-contribute">
+    <p class="admonition-title">Знаете больше? Помогите дополнить</p>
+    <p>
+      Вики живёт за счёт опыта сообщества. Если вы заметили ошибку, устаревшую
+      информацию или знаете что-то полезное по этой теме — поделитесь, это займёт минуту:
+    </p>
+    <ul>
+      <li>
+        <strong>Проще всего</strong> — напишите в чате
+        <a href="https://t.me/aimairn/43114" rel="noopener">«После 30.06.2025»</a>.
+        Кто-то из ведущих вики перенесёт это в статью.
+      </li>
+      <li>
+        <strong>Умеете работать с GitHub</strong> —
+        {% if page and page.edit_url %}<a href="{{ page.edit_url }}" rel="noopener">поправьте эту страницу</a>{% else %}поправьте текст в репозитории{% endif %}
+        или откройте
+        <a href="https://github.com/Self-Perfection/aima-renovacoes-wiki/issues" rel="noopener">issue</a>.
+      </li>
+    </ul>
+    <p>
+      Подробнее о том, как всё устроено — <a href="{{ 'kak-dopolnit/' | url }}">Как дополнить вики</a>.
+    </p>
+  </aside>
+  {% endif %}
+{% endblock %}

@@ -6,9 +6,16 @@ site_url: https://self-perfection.github.io/aima-renovacoes-wiki/
 docs_dir: wiki
 site_dir: site
 
+# Ссылка на репозиторий-источник + кнопка «править» на каждой странице.
+# edit_uri ведёт в редактор GitHub по пути внутри docs_dir (wiki/).
+repo_url: https://github.com/Self-Perfection/aima-renovacoes-wiki
+repo_name: aima-renovacoes-wiki
+edit_uri: edit/main/wiki/
+
 theme:
   name: material
   language: ru
+  custom_dir: overrides
   icon:
     logo: material/card-account-details-outline
   features:
@@ -21,6 +28,8 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+    - content.action.edit
+    - content.action.view
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -59,6 +68,7 @@ exclude_docs: |
 
 nav:
   - Главная: index.md
+  - Как дополнить вики: kak-dopolnit.md
   - Процесс продления:
       - process/index.md
       - Портал и доступ: process/portal-i-dostup.md
