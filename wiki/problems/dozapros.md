@@ -1,3 +1,7 @@
+---
+description: "Audiência prévia и alegação: как выглядит дозапрос AIMA, что делать при proposta de indeferimento и в какие сроки отвечать."
+---
+
 # Дозапрос (audiência prévia / alegação)
 
 **Дозапрос** — когда AIMA запрашивает недостающие документы или присылает

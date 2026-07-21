@@ -1,3 +1,7 @@
+---
+description: "Проверка долгов перед Finanças (AT) и Segurança Social на портале AIMA: статус Em Revisão, кнопка Reavaliar Dívida, блокер из-за отсутствующего NISS."
+---
+
 # Задолженности (Finanças / Segurança Social)
 
 Прежде чем портал даст подать заявку, он проверяет отсутствие задолженностей перед
