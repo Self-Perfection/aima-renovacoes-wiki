@@ -144,6 +144,19 @@ def link(mid: int) -> str:
     return f"https://t.me/aimairn/{mid}"
 
 
+def replies_to(mid: int) -> list[dict]:
+    """
+    Прямые ответы на сообщение, в хронологическом порядке.
+
+    Нужно, когда в чате процитирован вопрос: ответ на него — отдельное
+    сообщение, и без него в вики попадёт «вопрос без ответа».
+    """
+    msgs = load()
+    hits = [m for m in msgs.values() if m.get("reply") == mid]
+    hits.sort(key=lambda m: m["date"])
+    return hits
+
+
 def search(pattern, topic=None, min_len=0, max_len=None):
     """Сообщения, подходящие под регэксп/фильтры, в хронологическом порядке."""
     msgs = load()
@@ -176,6 +189,7 @@ def main() -> int:
     )
     p.add_argument("pattern", nargs="?", help="регэксп (регистр игнорируется)")
     p.add_argument("--id", type=int, help="показать одно сообщение целиком")
+    p.add_argument("--replies", type=int, metavar="ID", help="ответы на это сообщение")
     p.add_argument("--topic", type=int, help="только эта ветка (id из списка ниже)")
     p.add_argument("--min-len", type=int, default=0, help="от N символов (гайды — от 600)")
     p.add_argument("--max-len", type=int, help="до N символов")
@@ -191,8 +205,15 @@ def main() -> int:
         _show(m, 10**9)
         return 0
 
+    if args.replies:
+        hits = replies_to(args.replies)
+        print(f"### ответов на #{args.replies}: {len(hits)}\n")
+        for m in hits:
+            _show(m, args.chars)
+        return 0
+
     if not args.pattern:
-        p.error("нужен либо регэксп, либо --id")
+        p.error("нужен регэксп, либо --id, либо --replies")
 
     hits = search(args.pattern, args.topic, args.min_len, args.max_len)
     shown = hits if args.limit == 0 else hits[: args.limit]
