@@ -54,6 +54,7 @@ TOPICS = {
 }
 
 MAIN_TOPIC = 43114
+GENERAL_TOPIC = 1
 
 # Поля, которые вытаскиваем из result.json. reply нужен для определения топика.
 JQ_FILTER = (
@@ -66,15 +67,22 @@ _msgs: dict[int, dict] = {}
 _topic_ids: set[int] = set()
 
 
-def _find_export(pattern: str) -> pathlib.Path:
-    """Найти result.json нужного экспорта (имена каталогов содержат дату)."""
+def _find_exports(pattern: str) -> list[pathlib.Path]:
+    """
+    Все result.json, подходящие под маску (имена каталогов содержат дату).
+
+    Экспортов одного вида может быть несколько: полный выгружается редко, а
+    доклад свежего материала удобнее делать частичным («past month» — 13 МБ
+    против 279 МБ). Они склеиваются в один индекс, поздние сообщения
+    перекрывают ранние (правки текста), см. _load_exports().
+    """
     found = sorted(EXPORT_DIR.glob(f"{pattern}/result.json"))
     if not found:
         sys.exit(
             f"❌ Не найден экспорт '{pattern}' в {EXPORT_DIR}.\n"
             "   Экспорт истории чата не хранится в репозитории (перс. данные)."
         )
-    return found[-1]
+    return found
 
 
 def _extract(src: pathlib.Path, dst: pathlib.Path) -> None:
@@ -89,25 +97,28 @@ def _extract(src: pathlib.Path, dst: pathlib.Path) -> None:
         subprocess.run(["jq", "-c", JQ_FILTER, str(src)], stdout=out, check=True)
 
 
+def _load_exports(pattern: str, prefix: str) -> dict[int, dict]:
+    """Склеить все экспорты по маске в один индекс id → сообщение."""
+    out: dict[int, dict] = {}
+    for src in _find_exports(pattern):
+        dst = CACHE_DIR / f"{prefix}-{src.parent.name}.jsonl"
+        _extract(src, dst)
+        for line in dst.read_text(encoding="utf-8").splitlines():
+            m = json.loads(line)
+            out[m["id"]] = m
+    return out
+
+
 def load() -> dict[int, dict]:
-    """Загрузить сообщения полного экспорта (с кэшированием). id → сообщение."""
+    """Загрузить сообщения полных экспортов (с кэшированием). id → сообщение."""
     global _msgs, _topic_ids
     if _msgs:
         return _msgs
 
-    all_jsonl = CACHE_DIR / "all.jsonl"
-    _extract(_find_export("Export all *"), all_jsonl)
-    for line in all_jsonl.read_text(encoding="utf-8").splitlines():
-        m = json.loads(line)
-        _msgs[m["id"]] = m
+    _msgs = _load_exports("Export all *", "all")
 
     # Экспорт одного топика — страховка для определения топика, см. root_of().
-    topic_jsonl = CACHE_DIR / f"topic-{MAIN_TOPIC}.jsonl"
-    _extract(_find_export('Export "После 30.06.2025"*'), topic_jsonl)
-    _topic_ids = {
-        json.loads(line)["id"]
-        for line in topic_jsonl.read_text(encoding="utf-8").splitlines()
-    }
+    _topic_ids = set(_load_exports('Export "После 30.06.2025"*', "topic"))
     return _msgs
 
 
@@ -118,10 +129,15 @@ def root_of(mid: int) -> int:
     У сообщения верхнего уровня внутри ветки reply указывает на id самого
     топика, поэтому подъём рано или поздно упирается в известный топик.
 
-    ⚠️ Цепочка рвётся, если родительское сообщение удалено (его нет в
-    экспорте). Для основного топика это лечится проверкой по отдельному
-    экспорту ветки; для остальных топиков страховки нет — результат стоит
-    перепроверить глазами.
+    Цепочка, оборвавшаяся на сообщении **без** reply, означает General: внутри
+    ветки такого не бывает. Проверено по экспорту ветки 43114 — из 46 412
+    сообщений с такой цепочкой в ней нет ни одного.
+
+    ⚠️ Цепочка рвётся, если родительское сообщение отсутствует в экспорте
+    (удалено; в частичном экспорте — вышло за период). Тогда топик неизвестен:
+    для основного топика это лечится проверкой по отдельному экспорту ветки,
+    для остальных страховки нет — результат стоит перепроверить глазами.
+    Таких сообщений мало (3 207 из 146 641 в экспортах на 27.07.2026).
     """
     load()
     seen: set[int] = set()
@@ -130,8 +146,10 @@ def root_of(mid: int) -> int:
         if cur in TOPICS:
             return cur
         m = _msgs.get(cur)
-        if m is None or m.get("reply") is None or cur in seen:
+        if m is None or cur in seen:  # родитель не в экспорте / цикл
             return MAIN_TOPIC if mid in _topic_ids else cur
+        if m.get("reply") is None:  # верх цепочки вне ветки — значит General
+            return MAIN_TOPIC if mid in _topic_ids else GENERAL_TOPIC
         seen.add(cur)
         cur = m["reply"]
 
