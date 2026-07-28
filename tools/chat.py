@@ -57,11 +57,20 @@ MAIN_TOPIC = 43114
 GENERAL_TOPIC = 1
 
 # Поля, которые вытаскиваем из result.json. reply нужен для определения топика.
+#
+# links — адреса гиперссылок (entity `text_link`). Без них URL, спрятанный под
+# текстом («вот страница инициативы»), в экспорте виден только как этот текст, и
+# поиск по домену его не находит. Так однажды «потерялась» ссылка на
+# parlamento.pt, которая всё время лежала в процитированном сообщении.
 JQ_FILTER = (
     '.messages[] | select(.type=="message") | '
     "{id, date, from, reply: .reply_to_message_id, "
-    'text: ([.text_entities[].text] | join(""))}'
+    'text: ([.text_entities[].text] | join("")), '
+    "links: [.text_entities[] | select(.href) | .href]}"
 )
+
+# Меняется при правке JQ_FILTER — иначе останется старый кэш без новых полей.
+CACHE_VERSION = 2
 
 _msgs: dict[int, dict] = {}
 _topic_ids: set[int] = set()
@@ -101,7 +110,7 @@ def _load_exports(pattern: str, prefix: str) -> dict[int, dict]:
     """Склеить все экспорты по маске в один индекс id → сообщение."""
     out: dict[int, dict] = {}
     for src in _find_exports(pattern):
-        dst = CACHE_DIR / f"{prefix}-{src.parent.name}.jsonl"
+        dst = CACHE_DIR / f"{prefix}-v{CACHE_VERSION}-{src.parent.name}.jsonl"
         _extract(src, dst)
         for line in dst.read_text(encoding="utf-8").splitlines():
             m = json.loads(line)
@@ -176,7 +185,12 @@ def replies_to(mid: int) -> list[dict]:
 
 
 def search(pattern, topic=None, min_len=0, max_len=None):
-    """Сообщения, подходящие под регэксп/фильтры, в хронологическом порядке."""
+    """
+    Сообщения, подходящие под регэксп/фильтры, в хронологическом порядке.
+
+    Регэксп проверяется и по адресам гиперссылок, а не только по видимому
+    тексту: искать домен или номер документа в URL — обычное дело.
+    """
     msgs = load()
     pat = re.compile(pattern, re.I)
     hits = [
@@ -184,7 +198,7 @@ def search(pattern, topic=None, min_len=0, max_len=None):
         if len(m["text"]) >= min_len
         and (max_len is None or len(m["text"]) <= max_len)
         and (topic is None or root_of(m["id"]) == topic)
-        and pat.search(m["text"])
+        and (pat.search(m["text"]) or any(pat.search(u) for u in m.get("links", ())))
     ]
     hits.sort(key=lambda m: m["date"])
     return hits
@@ -196,6 +210,9 @@ def _show(m: dict, chars: int) -> None:
     print(f"--- #{m['id']} | {m['date'][:10]} | {name} | {link(m['id'])}")
     text = m["text"]
     print(text[:chars] + ("…" if len(text) > chars else ""))
+    # Адреса гиперссылок — в тексте их не видно, а они часто и есть суть находки.
+    for url in dict.fromkeys(m.get("links", ())):
+        print(f"    🔗 {url}")
     print()
 
 
