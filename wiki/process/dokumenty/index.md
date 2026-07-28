@@ -58,11 +58,33 @@ description: "Какие документы грузить на портале A
 1. **Autorização de Residência** — скан текущего/истёкшего ВНЖ (с двух сторон).
 2. **Comprovativo de Condições de Alojamento** (адрес) — договор аренды,
    `Domicílio Fiscal` из Finanças, справка из junta, инвойсы/receibo за квартиру.
+   AIMA дополнительно требует **декларацию чести самого заявителя** о том, где он
+   живёт и на каком основании; официальный бланк —
+   [minuta declaração de alojamento](https://aima.gov.pt/media/pages/documents/b8786507b4-1715260075/minuta-declaracao-de-alojamento.pdf)
+   (все бланки — на странице [Impressos e minutas](https://aima.gov.pt/pt/impressos-e-minutas)).
+   К декларации прикладывают подтверждение основания
+   ([#106311](https://t.me/aimairn/64074/106311)):
+    - **своё жильё** — доступ к электронной выписке или бумажная
+      [certidão predial](https://www.predialonline.pt/PredialOnline/FRM005RPOLCP_input.action);
+    - **аренда** — договор с вашим именем **и** квитанция за прошлый месяц:
+      [договоры](https://imoveis.portaldasfinancas.gov.pt/arrendamento/consultarContratos/locador)
+      и recibos в кабинете Finanças —
+      [как арендатор](https://imoveis.portaldasfinancas.gov.pt/arrendamento/consultarRecibos/locatario)
+      или [как арендодатель](https://imoveis.portaldasfinancas.gov.pt/arrendamento/consultarRecibos/emitente);
+    - **безвозмездное пользование** — `contrato de comodato` **и** certidão
+      predial владельца.
 3. **Comprovativo de Frequência de Estágio** — для детей справка из школы/садика;
    для взрослых часто пустой PDF с текстом `não aplicável`.
 4. **Comprovativo de Meios de Subsistência** (средства к существованию) — 3
    последних receibo, IRS 2024 (declaração + nota de liquidação), выписка из
    португальского банка, Modelo-4 (для воссоединения). Точный набор — по статье.
+   Где брать в кабинете Finanças:
+   [recibos verdes](https://irs.portaldasfinancas.gov.pt/recibos/portal/consultar),
+   [comprovativo IRS](https://irs.portaldasfinancas.gov.pt/comprovativo/obterComprovativoForm),
+   [поданные декларации по деятельности](https://sitfiscal.portaldasfinancas.gov.pt/atividade/atividade/consultardeclaracoes);
+   данные о работодателе — в
+   [кабинете Segurança Social](https://app.seg-social.pt/ptss/ascd/pesquisa-entidade)
+   ([#20604](https://t.me/aimairn/1/20604), [#75845](https://t.me/aimairn/43114/75845)).
 5. **Comprovativo de Situação Excepcional** — обычно пустой PDF `não aplicável`.
 6. **Comprovativo de Sistema de Saúde** — регистрация в SNS с номером Utente
    или частная страховка.
@@ -71,7 +93,12 @@ description: "Какие документы грузить на портале A
 8. **Requerimento Inicial / Modelo 1** — [Modelo 1](https://aima.gov.pt/media/pages/documents/22249a7763-1752595470/modelo-1.pdf),
    галочка `Renovação`.
 9. **Requerimento para Consulta do Registo Criminal** — согласие на проверку
-   несудимости (официальная форма, [#46429](https://t.me/aimairn/43114/46429)).
+   несудимости: официальный бланк
+   [declaração de autorização (PDF)](https://vistos.mne.gov.pt/images/schengen/formularios/declaracao_autorizacao_rc_pt_aima.pdf)
+   ([#46429](https://t.me/aimairn/43114/46429),
+   [#75845](https://t.me/aimairn/43114/75845)). Саму справку о несудимости, если
+   её запросят отдельно, заказывают на
+   [registocriminal.justica.gov.pt](https://registocriminal.justica.gov.pt/).
 10. **Autorização de Residência do Titular** — для детей/воссоединения: ВНЖ
     родителя/основного заявителя.
 

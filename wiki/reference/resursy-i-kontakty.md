@@ -16,6 +16,9 @@ description: "Официальные порталы (AIMA, Finanças, Segurança
 | CTT (треки) | https://www.ctt.pt | отслеживание карты (на PT-языке) |
 | Predial Online | https://www.predialonline.pt | certidão permanente (недвижимость) |
 | Autenticação.gov | https://www.autenticacao.gov.pt | CMD (цифровая подпись) |
+| Espaço Cidadão (поиск отделений) | https://www2.gov.pt/locais-de-atendimento-de-servicos-publicos | где активировать CMD лично ([#70522](https://t.me/aimairn/70522)) |
+| Registo Criminal | https://registocriminal.justica.gov.pt | справка о несудимости |
+| Impressos e minutas AIMA | https://aima.gov.pt/pt/impressos-e-minutas | официальные бланки (Modelo 1, декларация о жилье) |
 | Diário da República | https://diariodarepublica.pt | тексты законов |
 
 ## Контакты AIMA
@@ -28,8 +31,24 @@ description: "Официальные порталы (AIMA, Finanças, Segurança
   - <loja.lisboa1@aima.gov.pt>, <loja.lisboa2@aima.gov.pt> — ложи Лиссабона
   - также встречались: <loja.cascais@aima.gov.pt>, <setubal@aima.gov.pt>,
     <portalservicos@aima.gov.pt>, <manifestacao.interesse@aima.gov.pt>,
-    <suporte.rfamiliar@aima.gov.pt>
+    <suporte.rfamiliar@aima.gov.pt>, <secretariado.dsi@aima.gov.pt>
+- **INCM (Монетный двор), печать карт:** <incm@incm.pt> — пишут, когда дело
+  зависло на этапе печати ([#94501](https://t.me/aimairn/43113/94501)).
 - **CTT поддержка (доставка):** 210 471 616 ([#79935](https://t.me/aimairn/43114/79935)).
+- **Бумажные письма с уведомлением о вручении** (`com aviso de recepção`) — по
+  адресам лож, например Lisboa I: `Avenida António Augusto de Aguiar, 20,
+  1069-119 Lisboa`; в Порту решения принимают на
+  `R. do Barão de Forrester 978, 4050-272`
+  ([#94501](https://t.me/aimairn/43113/94501),
+  [#155920](https://t.me/aimairn/43114/155920)).
+
+## Куда жаловаться
+
+- **Provedoria de Justiça (омбудсман):** https://www.provedor-jus.pt — отвечает,
+  но по существу часто «ждите» ([#94501](https://t.me/aimairn/43113/94501)).
+- **Форма обращения к президенту:** https://www.presidencia.pt/contactos/formulario-de-contacto
+- **portaldaqueixa.com**, `Livro Amarelo` в ложе — см.
+  [Застревание](../problems/zastrevanie.md).
 
 ## Связанные Telegram-чаты
 

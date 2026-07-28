@@ -204,6 +204,27 @@ def search(pattern, topic=None, min_len=0, max_len=None):
     return hits
 
 
+def link_inventory(domain_pattern: str | None = None) -> list[tuple[str, list[dict]]]:
+    """
+    Инвентарь адресов гиперссылок: URL → сообщения, где он встречается.
+
+    Нужен для ревизии «что из чата ещё не перенесено в вики»: такие ссылки в
+    тексте не видны (они спрятаны под словами), и глазами их не выловить.
+    Сортировка — по числу упоминаний: чем чаще ссылку давали, тем вероятнее она
+    полезна читателю.
+    """
+    msgs = load()
+    pat = re.compile(domain_pattern, re.I) if domain_pattern else None
+    urls: dict[str, list[dict]] = {}
+    for m in msgs.values():
+        for url in dict.fromkeys(m.get("links", ())):
+            if pat is None or pat.search(url):
+                urls.setdefault(url, []).append(m)
+    for hits in urls.values():
+        hits.sort(key=lambda m: m["date"])
+    return sorted(urls.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+
+
 def _show(m: dict, chars: int) -> None:
     root = root_of(m["id"])
     name = TOPICS.get(root, "топик неизвестен")
@@ -230,7 +251,26 @@ def main() -> int:
     p.add_argument("--max-len", type=int, help="до N символов")
     p.add_argument("--limit", type=int, default=25, help="сколько показать (0 = все)")
     p.add_argument("--chars", type=int, default=2000, help="сколько символов текста")
+    p.add_argument(
+        "--links",
+        nargs="?",
+        const="",
+        metavar="РЕГЭКСП",
+        help="инвентарь адресов гиперссылок (можно сузить регэкспом по URL)",
+    )
     args = p.parse_args()
+
+    if args.links is not None:
+        inv = link_inventory(args.links or None)
+        print(f"### уникальных адресов: {len(inv)}\n")
+        for url, hits in inv:
+            first, last = hits[0], hits[-1]
+            period = first["date"][:10]
+            if last is not first:
+                period += f" … {last['date'][:10]}"
+            print(f"{len(hits):3d}×  {url}")
+            print(f"      {period} | {link(first['id'])}")
+        return 0
 
     if args.id:
         m = load().get(args.id)
