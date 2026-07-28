@@ -56,6 +56,17 @@ description: "Официальные порталы (AIMA, Finanças, Segurança
 | Первичное ВНЖ из Одивелаш/Авейру | https://t.me/aimairn/83903 |
 | Дозапросы (общая) | https://t.me/aimairn/122138 |
 
+## Отслеживание изменений закона
+
+- [**Proposta de Lei n.º 75/XVII — страница инициативы на parlamento.pt**](https://www.parlamento.pt/ActividadeParlamentar/Paginas/DetalheIniciativa.aspx?BID=356750)
+  — единственное место, где виден текущий статус закона, [отменяющего молчаливое
+  согласие](../problems/molchalivoe-soglasie.md): все этапы с датами, результаты
+  голосований, тексты поправок и PDF финального декрета. Там же появится отметка
+  о промульгации президентом (или об отправке в Конституционный суд).
+- [**Diário da República**](https://diariodarepublica.pt) — публикация принятых
+  законов. Пока закон не опубликован здесь, он не действует; после публикации
+  [новая редакция вступает в силу на следующий день](../problems/molchalivoe-soglasie.md).
+
 ## Полезные сторонние сайты
 
 - [**leximigratoria**](https://sites.google.com/site/leximigratoria) — статьи закона.
