@@ -262,6 +262,122 @@ description: "Deferimento tácito: 60 рабочих дней без решен�
    (**Submissão - Requerente**). Сам ответ — сертификат или отказ — приходит
    письмом, обычно за несколько дней.
 
+## Как выглядит сертификат
+
+Форма не произвольная: `n.º 8 do artigo 28.º-B do Decreto-Lei n.º 135/99`
+обязывает выдавать сертификат **по образцу из `Anexo II`** того же декрет-закона.
+Обязательного содержания там всего два абзаца:
+
+!!! quote "Anexo II do Decreto-Lei n.º 135/99 — Modelo de certidão de deferimento tácito"
+    A presente certidão atesta que … *(colocar a firma ou nome do interessado)*
+    obteve uma … *(colocar a designação legal do tipo de ato requerido e que foi
+    obtido por deferimento tácito)* para … *(identificar a atividade permitida
+    através do ato de deferimento tácito)*.
+
+    As autoridades públicas competentes devem, para todos os efeitos legais,
+    assumir que a … *(colocar a firma ou nome do interessado)* obteve todos os
+    atos necessários para a realização da atividade em causa junto das entidades
+    competentes, não podendo, designadamente, aplicar coimas por ausência da
+    licença/autorização/permissão necessária para o desenvolvimento desta
+    atividade.
+
+    Источник: [Artigo 28.º-B](https://diariodarepublica.pt/dr/legislacao-consolidada/decreto-lei/1999-107547988-839651306)
+    и [консолидированный текст DL 135/99 целиком](https://diariodarepublica.pt/dr/legislacao-consolidada/decreto-lei/1999-34445775)
+    (образец — в самом конце, `Anexo II`).
+
+Второй абзац — то, ради чего документ и берут: органы власти обязаны **для всех
+юридических целей** исходить из того, что нужное разрешение у вас есть, и не
+могут штрафовать за его отсутствие.
+
+Как ARTE заполняет пропуски в продлении ВНЖ:
+
+- полностью — «obteve uma **Pedido de renovação de autorização de residência**
+  para **Renovar a autorização de residência**»
+  ([#107885](https://t.me/aimairn/43113/107885));
+- с пустым местом — «obteve uma ⟨ничего⟩ para Renovar a autorização de
+  residência» ([#152564](https://t.me/aimairn/1/152564), июнь 2026): поле
+  `designação legal` просто не подставилось. Случаев, когда из-за этого документ
+  где-то не приняли, в чате нет.
+
+### Блок Dados da decisão
+
+Под основным текстом **бывает** блок `Dados da decisão`: `Data de decisão`,
+`Decisão:` (**`Certificado`** — выдан, **`Não Certificado`** — отказ) и
+`Fundamento:` с обоснованием; в конце — подпись `AGÊNCIA PARA A REFORMA
+TECNOLÓGICA DO ESTADO`. Известны три формулировки при одобрении, и все три
+означают одно и то же:
+
+!!! quote "Fundamento — вариант 1: срок просто вышел"
+    Cumpre referir que o prazo de decisão de 60 dias legalmente previsto nos n.ºs
+    6 e 7 do artigo 82.º da Lei n.º 23/2007, de 4 de julho, **foi ultrapassado**.
+
+    Face ao exposto, **emite-se a certidão requerida**, nos termos do artigo
+    28.º-B do Decreto-Lei n.º 135/99, de 22 de abril.
+
+    Não obstante o que antecede, cumpre referir que a emissão da presente
+    certidão não prejudica as ulteriores decisões e procedimentos que a entidade
+    visada entenda por convenientes no âmbito do pedido principal.
+
+    ([#108746](https://t.me/aimairn/43113/108746),
+    [#108483](https://t.me/aimairn/43113/108483))
+
+!!! quote "Вариант 2: AIMA ответила, но возражений не привела"
+    A entidade visada, AIMA, foi notificada no âmbito deste procedimento **não
+    tendo evidenciado qualquer facto que obstaculize à verificação de deferimento
+    tácito**.
+
+    Face ao exposto, emite-se a certidão requerida, nos termos do artigo 28.º-B
+    do Decreto-Lei n.º 135/99, de 22 de abril.
+
+    ([#107808](https://t.me/aimairn/43113/107808))
+
+!!! quote "Вариант 3: AIMA промолчала"
+    Mais se acrescenta que, a AIMA, I.P., enquanto entidade visada, foi notificada
+    no âmbito deste procedimento, **não tendo sido registada qualquer resposta no
+    prazo previsto para o efeito**, pelo que se emite a certidão requerida, nos
+    termos do artigo 28.º-B do Decreto-Lei n.º 135/99, de 22 de abril.
+
+    ([#109183](https://t.me/aimairn/43113/109183))
+
+Последняя оговорка варианта 1 («не препятствует дальнейшим решениям AIMA») пугает
+читателей, но это не отмена сертификата: она отражает `n.º 12` статьи 28.º-B —
+акт, возникший из молчаливого согласия, в принципе может быть впоследствии
+аннулирован или отозван по закону
+([#109703](https://t.me/aimairn/43114/109703)).
+
+⚠️ **Сертификат без блока `Dados da decisão` — не брак.** С конца декабря 2025
+такие пошли массово ([#112676](https://t.me/aimairn/43113/112676),
+[#153755](https://t.me/aimairn/122138/153755)), и как минимум один из них
+сработал — дело сдвинулось ([#153775](https://t.me/aimairn/122138/153775)).
+Обязательные два абзаца `Anexo II` в нём есть, а блока `Dados da decisão` в
+законном образце нет вовсе.
+
+### Как понять, что пришёл именно сертификат
+
+- Смотреть на слово после `Decisão:` — `Certificado` значит «выдан»
+  ([#106295](https://t.me/aimairn/43113/106295)). Если блока нет — ориентируйтесь
+  на первый абзац: `A presente certidão atesta que…` (отказ так не начинается,
+  там `não pode haver lugar à emissão da certidão requerida`).
+- Статус запроса виден в личном кабинете:
+  [area-reservada.digital.gov.pt](https://area-reservada.digital.gov.pt/negocios-fundacoes)
+  ([#103868](https://t.me/aimairn/43113/103868)).
+- Письма приходят с адреса `noreply@arte.gov.pt`, а не от AIMA. Тема
+  `Submissão - Requerente` — это только подтверждение подачи, не сертификат
+  ([#103020](https://t.me/aimairn/43113/103020)).
+- К одобрению в кабинете дополнительно приложено письмо на бланке AIMA с
+  обоснованием — на почту оно не приходит, его нужно забирать из кабинета
+  ([#106010](https://t.me/aimairn/43114/106010)).
+- Известный сбой: статус `Pedido arquivado`, а скачивается пустой файл,
+  повторяющий вашу же заявку ([#107547](https://t.me/aimairn/43113/107547),
+  [#107802](https://t.me/aimairn/43113/107802)). Это не сертификат — запрос
+  придётся подавать заново.
+
+Живые примеры документа (скриншоты в чате): полный и урезанный варианты рядом —
+[#108299](https://t.me/aimairn/43113/108299); «должен выглядеть вот так?» —
+[#105445](https://t.me/aimairn/43113/105445),
+[#112773](https://t.me/aimairn/43113/112773); вид одобренного запроса в кабинете
+gov.pt — [#112313](https://t.me/aimairn/43114/112313).
+
 ## Почему отказывают (Não Certificado)
 
 Отказ приходит с формулировкой `parecer desfavorável à formação do deferimento

@@ -62,15 +62,23 @@ GENERAL_TOPIC = 1
 # текстом («вот страница инициативы»), в экспорте виден только как этот текст, и
 # поиск по домену его не находит. Так однажды «потерялась» ссылка на
 # parlamento.pt, которая всё время лежала в процитированном сообщении.
+#
+# media — вложение (скриншот, PDF). Много ценного в чате показано картинкой:
+# бланк сертификата, текст отказа, экраны портала. В тексте от такого сообщения
+# остаётся в лучшем случае подпись, поэтому поиском они не находятся — нужен
+# отдельный признак. Значение — путь к файлу внутри каталога экспорта либо
+# заглушка «(File not included…)», если медиа не выгружали.
 JQ_FILTER = (
     '.messages[] | select(.type=="message") | '
     "{id, date, from, reply: .reply_to_message_id, "
     'text: ([.text_entities[].text] | join("")), '
-    "links: [.text_entities[] | select(.href) | .href]}"
+    "links: [.text_entities[] | select(.href) | .href], "
+    "media: (.photo // .file), "
+    "media_name: (.file_name // .media_type // (if .photo then \"photo\" else null end))}"
 )
 
 # Меняется при правке JQ_FILTER — иначе останется старый кэш без новых полей.
-CACHE_VERSION = 2
+CACHE_VERSION = 3
 
 _msgs: dict[int, dict] = {}
 _topic_ids: set[int] = set()
@@ -114,6 +122,13 @@ def _load_exports(pattern: str, prefix: str) -> dict[int, dict]:
         _extract(src, dst)
         for line in dst.read_text(encoding="utf-8").splitlines():
             m = json.loads(line)
+            # Путь к вложению — относительно каталога экспорта, а он известен
+            # только здесь. Файл есть не всегда: в полном экспорте медиа не
+            # выгружали, там вместо пути стоит «(File not included…)».
+            media = m.get("media")
+            if media:
+                path = src.parent / media
+                m["media_path"] = str(path) if path.exists() else None
             out[m["id"]] = m
     return out
 
@@ -184,12 +199,16 @@ def replies_to(mid: int) -> list[dict]:
     return hits
 
 
-def search(pattern, topic=None, min_len=0, max_len=None):
+def search(pattern, topic=None, min_len=0, max_len=None, media=False):
     """
     Сообщения, подходящие под регэксп/фильтры, в хронологическом порядке.
 
     Регэксп проверяется и по адресам гиперссылок, а не только по видимому
     тексту: искать домен или номер документа в URL — обычное дело.
+
+    media=True оставляет только сообщения с вложением. Пустой регэксп при этом
+    осмыслен: «покажи все картинки вокруг такого-то периода» — обычный способ
+    найти скриншот, у которого нет подписи.
     """
     msgs = load()
     pat = re.compile(pattern, re.I)
@@ -198,6 +217,7 @@ def search(pattern, topic=None, min_len=0, max_len=None):
         if len(m["text"]) >= min_len
         and (max_len is None or len(m["text"]) <= max_len)
         and (topic is None or root_of(m["id"]) == topic)
+        and (not media or m.get("media"))
         and (pat.search(m["text"]) or any(pat.search(u) for u in m.get("links", ())))
     ]
     hits.sort(key=lambda m: m["date"])
@@ -234,6 +254,9 @@ def _show(m: dict, chars: int) -> None:
     # Адреса гиперссылок — в тексте их не видно, а они часто и есть суть находки.
     for url in dict.fromkeys(m.get("links", ())):
         print(f"    🔗 {url}")
+    if m.get("media"):
+        where = m.get("media_path") or "файл не выгружен — смотреть по ссылке"
+        print(f"    📎 {m.get('media_name') or 'вложение'}: {where}")
     print()
 
 
@@ -249,6 +272,7 @@ def main() -> int:
     p.add_argument("--topic", type=int, help="только эта ветка (id из списка ниже)")
     p.add_argument("--min-len", type=int, default=0, help="от N символов (гайды — от 600)")
     p.add_argument("--max-len", type=int, help="до N символов")
+    p.add_argument("--media", action="store_true", help="только сообщения с вложением")
     p.add_argument("--limit", type=int, default=25, help="сколько показать (0 = все)")
     p.add_argument("--chars", type=int, default=2000, help="сколько символов текста")
     p.add_argument(
@@ -287,10 +311,10 @@ def main() -> int:
             _show(m, args.chars)
         return 0
 
-    if not args.pattern:
-        p.error("нужен регэксп, либо --id, либо --replies")
+    if not args.pattern and not args.media:
+        p.error("нужен регэксп, либо --media, либо --id, либо --replies")
 
-    hits = search(args.pattern, args.topic, args.min_len, args.max_len)
+    hits = search(args.pattern or "", args.topic, args.min_len, args.max_len, args.media)
     shown = hits if args.limit == 0 else hits[: args.limit]
     print(f"### найдено: {len(hits)} (показано {len(shown)})\n")
     for m in shown:
