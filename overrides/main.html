@@ -6,6 +6,27 @@
   собирает превью из <title> + description. Заголовок/описание берём из страницы,
   описание — из `description:` во front matter (см. CLAUDE.md).
 -->
+<!--
+  Заголовок вкладки. Material в своём base.html склеивает его через обычный дефис
+  (`{{ page.title }} - {{ config.site_name }}`), а og:title ниже — через длинное
+  тире, из-за чего два заголовка одной страницы выглядели по-разному. Повторяем
+  здесь логику Material один в один, меняя только разделитель на «—».
+
+  Рассматривались ещё два варианта: привести наоборот og:title к дефису (правка
+  меньше, но в превью Telegram дефис между смысловыми частями читается хуже) и
+  развести разделители — «Заголовок · Продление ВНЖ Португалии — вики» в обоих
+  местах (в нынешнем виде «—» идёт дважды подряд, т.к. site_name сам с тире).
+-->
+{% block htmltitle %}
+  {% if page.meta and page.meta.title %}
+    <title>{{ page.meta.title }} — {{ config.site_name }}</title>
+  {% elif page.title and not page.is_homepage %}
+    <title>{{ page.title | striptags }} — {{ config.site_name }}</title>
+  {% else %}
+    <title>{{ config.site_name }}</title>
+  {% endif %}
+{% endblock %}
+
 {% block extrahead %}
   {{ super() }}
   {% set page_title = (page.meta and page.meta.title) or page.title or config.site_name %}

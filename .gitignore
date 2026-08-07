@@ -8,9 +8,6 @@ wiki/notebook.zim
 wiki/Default.md
 .zim/
 
-# Zim HTML-экспорт (не публикуем; сайт собирает MkDocs)
-/wiki-HTML/
-
 # Экспорт истории Telegram (большой, содержит перс. данные — НЕ публиковать)
 /Чат продления ВНЖ/
 

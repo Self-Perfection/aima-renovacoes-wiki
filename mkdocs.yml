@@ -51,8 +51,13 @@ markdown_extensions:
   - attr_list
   - tables
   - footnotes
+  # slugify — иначе кириллические заголовки дают якоря `#_1`, `#_2`, … : они
+  # нечитаемы и, что хуже, съезжают при добавлении разделов выше по странице,
+  # т.е. ссылка на секцию сайта живёт до следующей правки. Вариант из pymdownx
+  # сохраняет юникод, и якорь получается из самого заголовка.
   - toc:
       permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.magiclink:

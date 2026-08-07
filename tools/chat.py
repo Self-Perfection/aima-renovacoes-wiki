@@ -68,17 +68,28 @@ GENERAL_TOPIC = 1
 # остаётся в лучшем случае подпись, поэтому поиском они не находятся — нужен
 # отдельный признак. Значение — путь к файлу внутри каталога экспорта либо
 # заглушка «(File not included…)», если медиа не выгружали.
+#
+# rich_message — с августа 2026 Telegram выгружает сообщения с форматированием
+# (списки, чек-листы) не как плоский `text_entities`, а как дерево блоков; поля
+# `text`/`text_entities` у них нет вовсе, и старый фильтр на таком сообщении
+# падал («Cannot iterate over null»). Текст собираем рекурсивным обходом: строки
+# лежат в узлах вида {"type":"plain","text":"…"} на разной глубине, ссылки — в
+# полях `href` там же. `..` идёт в порядке документа, поэтому блоки склеиваются
+# переводом строки в исходном порядке.
 JQ_FILTER = (
     '.messages[] | select(.type=="message") | '
     "{id, date, from, reply: .reply_to_message_id, "
-    'text: ([.text_entities[].text] | join("")), '
-    "links: [.text_entities[] | select(.href) | .href], "
+    'text: (if .text_entities then ([.text_entities[].text] | join("")) '
+    'else ([.rich_message | .. | objects | select(.text | type == "string") | .text] '
+    '| join("\\n")) end), '
+    'links: ([(.text_entities // [])[] | select(.href) | .href] '
+    "+ [.rich_message | .. | objects | select(.href) | .href]), "
     "media: (.photo // .file), "
     "media_name: (.file_name // .media_type // (if .photo then \"photo\" else null end))}"
 )
 
 # Меняется при правке JQ_FILTER — иначе останется старый кэш без новых полей.
-CACHE_VERSION = 3
+CACHE_VERSION = 4
 
 _msgs: dict[int, dict] = {}
 _topic_ids: set[int] = set()
@@ -199,7 +210,7 @@ def replies_to(mid: int) -> list[dict]:
     return hits
 
 
-def search(pattern, topic=None, min_len=0, max_len=None, media=False):
+def search(pattern, topic=None, min_len=0, max_len=None, media=False, since=None):
     """
     Сообщения, подходящие под регэксп/фильтры, в хронологическом порядке.
 
@@ -209,6 +220,10 @@ def search(pattern, topic=None, min_len=0, max_len=None, media=False):
     media=True оставляет только сообщения с вложением. Пустой регэксп при этом
     осмыслен: «покажи все картинки вокруг такого-то периода» — обычный способ
     найти скриншот, у которого нет подписи.
+
+    since — нижняя граница id: доклад свежего материала («что нового с прошлого
+    экспорта») сводится к просмотру хвоста, а не всего чата. id растут во
+    времени, так что это же и фильтр по дате.
     """
     msgs = load()
     pat = re.compile(pattern, re.I)
@@ -216,6 +231,7 @@ def search(pattern, topic=None, min_len=0, max_len=None, media=False):
         m for m in msgs.values()
         if len(m["text"]) >= min_len
         and (max_len is None or len(m["text"]) <= max_len)
+        and (since is None or m["id"] >= since)
         and (topic is None or root_of(m["id"]) == topic)
         and (not media or m.get("media"))
         and (pat.search(m["text"]) or any(pat.search(u) for u in m.get("links", ())))
@@ -273,6 +289,8 @@ def main() -> int:
     p.add_argument("--min-len", type=int, default=0, help="от N символов (гайды — от 600)")
     p.add_argument("--max-len", type=int, help="до N символов")
     p.add_argument("--media", action="store_true", help="только сообщения с вложением")
+    p.add_argument("--since", type=int, metavar="ID",
+                   help="только сообщения с id ≥ ID (доклад свежего материала)")
     p.add_argument("--limit", type=int, default=25, help="сколько показать (0 = все)")
     p.add_argument("--chars", type=int, default=2000, help="сколько символов текста")
     p.add_argument(
@@ -311,10 +329,11 @@ def main() -> int:
             _show(m, args.chars)
         return 0
 
-    if not args.pattern and not args.media:
-        p.error("нужен регэксп, либо --media, либо --id, либо --replies")
+    if not args.pattern and not args.media and args.since is None:
+        p.error("нужен регэксп, либо --media, либо --since, либо --id, либо --replies")
 
-    hits = search(args.pattern or "", args.topic, args.min_len, args.max_len, args.media)
+    hits = search(args.pattern or "", args.topic, args.min_len, args.max_len,
+                  args.media, args.since)
     shown = hits if args.limit == 0 else hits[: args.limit]
     print(f"### найдено: {len(hits)} (показано {len(shown)})\n")
     for m in shown:
