@@ -22,12 +22,12 @@ description: "Португальские термины при продлени�
   renovação. Заявка на продление может стать concessão и против вашей воли — если
   AIMA переквалифицирует её на другую статью
   ([#95432](https://t.me/aimairn/43114/95432)).
-- **Pedido** — заявка/запрос. **Pedido id** — номер заявки (см. [Этапы](../process/etapy-zayavki.md)).
+- **Pedido** — заявка/запрос. **Pedido id** — номер заявки (см. [Этапы](../process/etapy-zayavki/index.md)).
 - **Novo Pedido** — кнопка подачи новой заявки.
 - **Submetido** — подана. **Aguarda Pagamento** — ожидает оплаты.
   **Carregamento de Documentos** — загрузка документов. **Avaliação** —
   рассмотрение. **Concluído / Deferido** — завершено/одобрено. **Indeferido** —
-  отказано. Подробно — [Этапы заявки](../process/etapy-zayavki.md).
+  отказано. Подробно — [Этапы заявки](../process/etapy-zayavki/index.md).
 - **Recibo Comprovativo** — PDF-подтверждение подачи с QR-кодом.
 - **Token** — публичная ссылка для проверки статуса без входа (из QR).
 - **Audiência Prévia / Alegação** — дозапрос/возражение, см. [Дозапрос](../problems/dozapros.md).

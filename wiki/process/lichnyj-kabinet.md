@@ -69,4 +69,4 @@ description: "Личный кабинет портала AIMA: блок Identifi
 ## Дальше
 
 Когда проверка долга прошла и появилась кнопка **Novo Pedido** — переходите к
-[Этапам заявки](etapy-zayavki.md).
+[Этапам заявки](etapy-zayavki/index.md).

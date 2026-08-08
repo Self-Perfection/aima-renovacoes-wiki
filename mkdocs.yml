@@ -78,7 +78,9 @@ nav:
       - process/index.md
       - Портал и доступ: process/portal-i-dostup.md
       - Личный кабинет: process/lichnyj-kabinet.md
-      - Этапы заявки: process/etapy-zayavki.md
+      - Этапы заявки:
+          - process/etapy-zayavki/index.md
+          - Числовой код статуса: process/etapy-zayavki/kod-statusa.md
       - Оплата: process/oplata.md
       - Документы:
           - process/dokumenty/index.md

@@ -15,7 +15,9 @@ Submetido → Pagamento → Documentos → Avaliação → Concluído (Deferido)
 
 1. [Портал и доступ](portal-i-dostup.md) — регистрация, требования, ошибки входа
 2. [Личный кабинет](lichnyj-kabinet.md) — поля, задолженности, блок Título
-3. [Этапы заявки](etapy-zayavki.md) — статусы от подачи до готовой карты
+3. [Этапы заявки](etapy-zayavki/index.md) — статусы от подачи до готовой карты
+   (и [числовой код статуса](etapy-zayavki/kod-statusa.md) — как посмотреть
+   подробнее, чем показывает портал)
 4. [Оплата](oplata.md) — референс, сумма, сроки
 5. [Документы](dokumenty/index.md) — что и как загружать
    - [Заверение паспорта](dokumenty/zaverenie-pasporta.md)
