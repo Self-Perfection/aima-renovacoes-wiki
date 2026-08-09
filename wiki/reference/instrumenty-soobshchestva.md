@@ -20,9 +20,9 @@ description: "Инструменты сообщества по задачам: �
 видно движение дела, когда снаружи всё замерло.
 
 **Дополнение к браузеру «AIMA Renovação Status Display»** показывает этот код
-прямо на странице, вместе с расшифровкой и журналом изменений
-([#135777](https://t.me/aimairn/43114/135777)). Технически это «юзерскрипт»:
-нужен менеджер юзерскриптов, дальше установка в один клик.
+прямо на странице по токену, вместе с тем, что про него известно, и журналом
+изменений ([#135777](https://t.me/aimairn/43114/135777)). Технически это
+«юзерскрипт»: нужен менеджер юзерскриптов, дальше установка в один клик.
 
 - Скрипт: [portal-renovacoes_aima.user.js](https://raw.githubusercontent.com/Self-Perfection/gov.pt_enhancement_userscripts/refs/heads/main/portal-renovacoes_aima.user.js)
   (репозиторий: [gov.pt_enhancement_userscripts](https://github.com/Self-Perfection/gov.pt_enhancement_userscripts))
