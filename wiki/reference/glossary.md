@@ -33,6 +33,12 @@ description: "Португальские термины при продлени�
   **Carregamento de Documentos** — загрузка документов. **Avaliação** —
   рассмотрение. **Concluído / Deferido** — завершено/одобрено. **Indeferido** —
   отказано. Подробно — [Этапы заявки](../process/etapy-zayavki/index.md).
+- **Cartão em produção** — карта передана в печать. **Cartão emitido** —
+  напечатана. **Cartão enviado** — отправлена (появляется трек CTT). Этих
+  статусов нет в личном кабинете: они видны только в
+  [проверке статуса через contactenos](../process/etapy-zayavki/index.md#contactenos).
+- **Código de rastreio** — код отслеживания посылки (трек-номер CTT), см.
+  [Карта и доставка](../process/karta-i-dostavka.md).
 - **Recibo Comprovativo** — PDF-подтверждение подачи с QR-кодом.
 - **Token** — публичная ссылка для проверки статуса без входа (из QR).
 - **Audiência Prévia / Alegação** — дозапрос/возражение, см. [Дозапрос](../problems/dozapros.md).

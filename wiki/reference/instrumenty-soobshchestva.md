@@ -69,6 +69,12 @@ description: "Инструменты сообщества по задачам: �
 [Застревание](../problems/zastrevanie.md) и
 [Карта и доставка](../process/karta-i-dostavka.md).
 
+💡 С 21.07.2026 трек-номер и статус печати можно узнать и **самостоятельно**,
+через проверку статуса в контактной форме AIMA — см.
+[Этапы заявки](../process/etapy-zayavki/index.md#contactenos). Бот остаётся
+полезен там, где нужен живой человек: спросить про ошибку печати, уточнить
+детали, которых на странице статуса нет.
+
 ## Уложить документы в лимит 2 МБ
 
 - [github.com/deminimis/minimalpdfcompress](https://github.com/deminimis/minimalpdfcompress) — оффлайн-утилита.

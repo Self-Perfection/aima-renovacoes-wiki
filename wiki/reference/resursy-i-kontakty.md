@@ -10,7 +10,7 @@ description: "Официальные порталы (AIMA, Finanças, Segurança
 |---|---|---|
 | Портал продлений AIMA | https://portal-renovacoes.aima.gov.pt | подача продления |
 | Сайт AIMA | https://aima.gov.pt | общая инфо, Modelo 1 |
-| Контактная форма AIMA | https://contactenos.aima.gov.pt/contact-form | запрос изменений (⚠️ 1 раз по пункту) |
+| Контактная форма AIMA | https://contactenos.aima.gov.pt/contact-form | запрос изменений (⚠️ 1 раз по пункту), [проверка статуса дела и трек CTT](../process/etapy-zayavki/index.md#contactenos) |
 | Portal das Finanças | https://www.portaldasfinancas.gov.pt | долги AT, Domicílio Fiscal, IRS |
 | Segurança Social | https://www.seg-social.pt | NISS, долги SS |
 | CTT (треки) | https://www.ctt.pt | отслеживание карты (на PT-языке) |
